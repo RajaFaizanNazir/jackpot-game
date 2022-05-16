@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 /**************************************** */
 const usersRoutes = require("./routes/users-routes");
+const transactionRoutes = require("./routes/transactions-routes");
 const HttpError = require("./util/http-error");
 /**************************************** */
 const app = express();
@@ -14,6 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 /**************************************** */
 app.use("/api/user", usersRoutes);
+app.use("/api/transaction/", transactionRoutes);
 /**************************************** */
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);

@@ -27,6 +27,18 @@ const profilePictureValidator = () => {
   return [body("profilePicture").exists().isString()];
 };
 /**************************************** */
+const fromValidator = () => {
+  return [body("from").exists()];
+};
+/**************************************** */
+const toValidator = () => {
+  return [body("to").exists()];
+};
+/**************************************** */
+const amountValidator = () => {
+  return [body("amount").exists()];
+};
+/**************************************** */
 module.exports = {
   credentialsValidator,
   usernameValidator,
@@ -36,5 +48,8 @@ module.exports = {
   genderValidator,
   profilePictureValidator,
   passwordValidator,
+  fromValidator,
+  toValidator,
+  amountValidator,
 };
 /**************************************** */
