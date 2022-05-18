@@ -3,11 +3,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const userSchema = new Schema(
   {
-    name: { type: String },
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true, minlength: 6 },
-    profilePicture: { type: String },
-    gender: { type: String, required: true, enum: ["male", "female"] },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    profilePicture: { type: String, required: true },
+    walletAddress: { type: String, unique: true },
   },
   {
     timestamps: true,

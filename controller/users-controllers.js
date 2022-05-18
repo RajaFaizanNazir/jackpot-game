@@ -17,29 +17,29 @@ const getUsers = async (req, res, next) => {
   res.json({ users: users });
 };
 /**************************************** */
-const getUsersByUsername = async (req, res, next) => {
+const getUsersByWalletAddress = async (req, res, next) => {
   const errors = validator.validationResult(req);
   if (!errors.isEmpty()) {
     return next(
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const { username } = req.body;
+  const { walletAddress } = req.body;
   let existingUser;
   try {
-    existingUser = await User.findOne({ username: username });
+    existingUser = await User.findOne({ walletAddress: walletAddress });
   } catch (err) {
     const error = new HttpError("Please try again later." + err, 500);
     return next(error);
   }
   if (!existingUser) {
-    const error = new HttpError("Invalid Email, Not found.", 403);
+    const error = new HttpError("Invalid Wallet Address, Not found.", 403);
     return next(error);
   }
   res.json(existingUser);
 };
 /**************************************** */
-const signup = async (req, res, next) => {
+const register = async (req, res, next) => {
   const errors = validator.validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -47,14 +47,14 @@ const signup = async (req, res, next) => {
     );
   }
 
-  const { name, username, password, gender, profilePicture } = req.body;
+  const { firstName, lastName, profilePicture, walletAddress } = req.body;
 
   let existingUser;
   try {
-    existingUser = await User.findOne({ username: username });
+    existingUser = await User.findOne({ walletAddress: walletAddress });
   } catch (err) {
     const error = new HttpError(
-      "Signing up failed, please try again later." + err,
+      "Registering up failed, please try again later." + err,
       500
     );
     return next(error);
@@ -62,29 +62,17 @@ const signup = async (req, res, next) => {
 
   if (existingUser) {
     const error = new HttpError(
-      "User exists already, please login instead.",
+      "User with same wallet address exists already, please login instead.",
       422
     );
     return next(error);
   }
 
-  let hashedPassword;
-  try {
-    hashedPassword = confidential.encrypt(password);
-  } catch (err) {
-    const error = new HttpError(
-      "Error Encrypting Password, please try again." + err,
-      500
-    );
-    return next(error);
-  }
-
   const createdUser = new User({
-    name,
-    username,
-    password: hashedPassword,
-    gender,
+    firstName,
+    lastName,
     profilePicture,
+    walletAddress,
   });
 
   try {
@@ -97,7 +85,9 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(201).json({ userId: createdUser.id, email: createdUser.username });
+  res
+    .status(201)
+    .json({ userId: createdUser.id, walletAddress: createdUser.walletAddress });
 };
 /**************************************** */
 const login = async (req, res, next) => {
@@ -107,11 +97,11 @@ const login = async (req, res, next) => {
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const { username, password } = req.body;
+  const { walletAddress } = req.body;
   let existingUser;
 
   try {
-    existingUser = await User.findOne({ username: username });
+    existingUser = await User.findOne({ walletAddress: walletAddress });
   } catch (err) {
     const error = new HttpError(
       "Logging in failed, please try again later." + err,
@@ -121,77 +111,22 @@ const login = async (req, res, next) => {
   }
   if (!existingUser) {
     const error = new HttpError(
-      "Invalid credentials, could not log you in.",
+      "Invalid Wallet Address, could not log you in.",
       403
     );
     return next(error);
   }
-  let isValidPassword = false;
-  try {
-    isValidPassword = confidential.isSame(password, existingUser.password);
-  } catch (err) {
-    const error = new HttpError(
-      "Could not log you in, please check your credentials and try again." +
-        err,
-      500
-    );
-    return next(error);
-  }
-  if (!isValidPassword) {
-    const error = new HttpError(
-      "Invalid credentials, could not log you in.",
-      403
-    );
-    return next(error);
-  }
+
   res.json({
     userId: existingUser.id,
-    email: existingUser.username,
+    email: existingUser.walletAddress,
   });
-};
-/**************************************** */
-const updatePassword = async (req, res, next) => {
-  const errors = validator.validationResult(req);
-  if (!errors.isEmpty()) {
-    return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
-    );
-  }
-  const { username, password } = req.body;
-  let existingUser;
-  try {
-    existingUser = await User.findOne({ username: username });
-  } catch (err) {
-    const error = new HttpError(
-      "Can not find user with this email, please try again." + err,
-      500
-    );
-    return next(error);
-  }
-  let hashedPassword;
-  try {
-    hashedPassword = confidential.encrypt(password);
-  } catch (err) {
-    const error = new HttpError(
-      "Could not create user, please try again." + err,
-      500
-    );
-    return next(error);
-  }
-  existingUser.password = hashedPassword;
-  existingUser.save(function (err) {
-    if (err) {
-      console.error("ERROR UPDATING DOCUMENT:" + err);
-    }
-  });
-  res.status(201).json({ username: existingUser.username });
 };
 /**************************************** */
 module.exports = {
-  signup,
+  register,
   login,
-  updatePassword,
   getUsers,
-  getUsersByUsername,
+  getUsersByWalletAddress,
 };
 /**************************************** */
