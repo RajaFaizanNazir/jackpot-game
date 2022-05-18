@@ -6,30 +6,28 @@ const validator = require("../middleware/validate");
 const router = express.Router();
 /**************************************** */
 router.post(
-  "/signup",
+  "/register",
   [
-    validator.credentialsValidator(),
-    validator.nameValidator(),
+    validator.firstNameValidator(),
+    validator.lastNameValidator(),
     validator.profilePictureValidator(),
-    validator.genderValidator(),
+    validator.walletAddressValidator(),
   ],
-  usersController.signup
+  usersController.register
 );
 /**************************************** */
-router.post("/login", validator.credentialsValidator(), usersController.login);
-/**************************************** */
 router.post(
-  "/updatePassword",
-  validator.credentialsValidator(),
-  usersController.updatePassword
+  "/login",
+  validator.walletAddressValidator(),
+  usersController.login
 );
 /**************************************** */
 router.get("/users", usersController.getUsers);
 /**************************************** */
 router.post(
-  "/UserByUsername",
-  validator.usernameValidator(),
-  usersController.getUsersByUsername
+  "/UserByWalletAddress",
+  validator.walletAddressValidator(),
+  usersController.getUsersByWalletAddress
 );
 /**************************************** */
 module.exports = router;

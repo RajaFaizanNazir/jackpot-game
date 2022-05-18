@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/RajaFaizanNazir/jackpot-game#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "express": "^4.18.1",
     "express-validator": "^6.14.0",
     "mongoose": "^6.3.3"

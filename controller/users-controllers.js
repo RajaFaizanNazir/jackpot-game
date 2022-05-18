@@ -1,6 +1,5 @@
 const HttpError = require("../util/http-error");
 const User = require("../model/user");
-const confidential = require("../middleware/confidential");
 const validator = require("../middleware/validate");
 /**************************************** */
 const getUsers = async (req, res, next) => {
