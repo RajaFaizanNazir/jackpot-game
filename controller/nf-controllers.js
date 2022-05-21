@@ -4,8 +4,8 @@ const { ethers } = require("ethers");
 const HttpError = require("./../util/http-error");
 const pinataSDK = require("@pinata/sdk");
 const pinata = pinataSDK(
-  "e329bad53a35269c6b1c",
-  "c4a3377fdf29b02bb9a00e2895faf4818a3f943ffb16c47d71796f838ad3d164"
+  process.env.PINATA_API_KEY,
+  process.env.PINATA_API_SECRET_KEY
 );
 const fs = require("fs");
 require("dotenv/config");
@@ -38,10 +38,10 @@ const uploadNft = async (req, res, next) => {
 
   const options = {
     pinataMetadata: {
-      name: "Generic Gametrain NFT",
+      name: "GameTrain NFT",
       keyvalues: {
-        customKey: "nothing special",
-        customKey2: "just Gametrain",
+        customKey: "Testing",
+        customKey2: "Game Train",
       },
     },
     pinataOptions: {
