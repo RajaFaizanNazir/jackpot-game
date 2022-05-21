@@ -1,10 +1,10 @@
 const express = require("express");
-const nftController = require("../controllers/nft-controllers");
-const validator = require("./../middleware/validator");
-const multer = require("./../middleware/multer");
-
+/**************************************** */
+const nftController = require("../controller/nft-controllers");
+const multer = require("../middleware/multer");
+/**************************************** */
 const router = express.Router();
-
+/**************************************** */
 router.post("/upload", multer.upload.single("image"), nftController.uploadNft);
-
+/**************************************** */
 module.exports = router;

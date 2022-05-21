@@ -1,4 +1,5 @@
 const express = require("express");
+const validator = require("../middleware/validate");
 /**************************************** */
 const jackpotController = require("../controller/jackpot-controllers");
 /**************************************** */

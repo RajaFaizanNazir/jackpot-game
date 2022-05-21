@@ -1,8 +1,9 @@
-const nft = require("../models/nft-model");
-const validator = require("./../middleware/validator");
+const nft = require("../model/nft");
+const validator = require("../middleware/validate");
 const { ethers } = require("ethers");
-const HttpError = require("./../util/http-error");
+const HttpError = require("../util/http-error");
 const pinataSDK = require("@pinata/sdk");
+require("dotenv").config();
 const pinata = pinataSDK(
   process.env.PINATA_API_KEY,
   process.env.PINATA_API_SECRET_KEY
