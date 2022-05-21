@@ -21,7 +21,7 @@ app.use("/api/user", usersRoutes);
 app.use("/api/transaction/", transactionRoutes);
 app.use("/api/nft/", nftRoutes);
 app.use("/api/winner/", winnerRoutes);
-app.use("api/jackpot/", jackpotRoutes);
+app.use("/api/jackpot/", jackpotRoutes);
 /**************************************** */
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
