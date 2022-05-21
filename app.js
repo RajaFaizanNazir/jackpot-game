@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const usersRoutes = require("./routes/users-routes");
 const transactionRoutes = require("./routes/transactions-routes");
 const nftRoutes = require("./routes/nft-routes");
+const winnerRoutes = require("./routes/winner-routes");
 const HttpError = require("./util/http-error");
 /**************************************** */
 const app = express();
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use("/api/user", usersRoutes);
 app.use("/api/transaction/", transactionRoutes);
 app.use("/api/nft/", nftRoutes);
+app.use("/api/winner/", winnerRoutes);
 /**************************************** */
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
