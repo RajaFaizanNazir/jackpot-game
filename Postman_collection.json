@@ -2,69 +2,177 @@
 	"info": {
 		"_postman_id": "ff4c0ad3-3691-4873-b2b3-f686262314ec",
 		"name": "Jackpot - GameTrain",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20050264"
 	},
 	"item": [
 		{
 			"name": "Create",
 			"item": [
 				{
-					"name": "Register",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"Testing1\",\n    \"lastName\": \"Testing1\",\n    \"profilePicture\": \"Testing1\",\n    \"walletAddress\": \"Testing1\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Users",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Testing1\",\n    \"lastName\": \"Testing1\",\n    \"profilePicture\": \"Testing1\",\n    \"walletAddress\": \"Testing1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/user/register",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"user",
+										"register"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "localhost:5000/api/user/register",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"user",
-								"register"
-							]
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"walletAddress\": \"Testing1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/user/login",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"walletAddress\": \"Testing1\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Transaction",
+					"item": [
+						{
+							"name": "Transfer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"from\": \"1234\",\n    \"to\": \"5678\",\n    \"amount\": \"111\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/transaction/transfer",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"transaction",
+										"transfer"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "localhost:5000/api/user/login",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"user",
-								"login"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Winner",
+					"item": [
+						{
+							"name": "Win",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"walletAddress\": \"1233\",\n    \"amount\": \"111\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/winner/win",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"winner",
+										"win"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Jackpot",
+					"item": [
+						{
+							"name": "Participate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"walletAddress\": \"123\",\n    \"amount\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/jackpot/participate",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"jackpot",
+										"participate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},
@@ -72,131 +180,179 @@
 			"name": "Read",
 			"item": [
 				{
-					"name": "Get All Transactions",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:5000/api/transaction/transaction",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"transaction",
-								"transaction"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Transactions from an account",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"from\": \"123\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Users",
+					"item": [
+						{
+							"name": "Get All Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/user/users",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"user",
+										"users"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "localhost:5000/api/transaction/transactionFrom",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"transaction",
-								"transactionFrom"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get All Transactions from an account Copy",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"to\": \"123\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Get User by WalletAddress",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"walletAddress\": \"Testing1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/user/UserByWalletAddress",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"user",
+										"UserByWalletAddress"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "localhost:5000/api/transaction/transactionTo",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"transaction",
-								"transactionTo"
-							]
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Get All Users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:5000/api/user/users",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"user",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get User by WalletAddress",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"walletAddress\": \"Testing1\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "Transaction",
+					"item": [
+						{
+							"name": "Get All Transactions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/transaction/transaction",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"transaction",
+										"transaction"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "localhost:5000/api/user/UserByWalletAddress",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"user",
-								"UserByWalletAddress"
-							]
+						{
+							"name": "Get All Transactions from an account",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"from\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/transaction/transactionFrom",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"transaction",
+										"transactionFrom"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Transactions from an account Copy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"to\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/transaction/transactionTo",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"transaction",
+										"transactionTo"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "Winner",
+					"item": [
+						{
+							"name": "Get All Winners",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/api/winner/winners",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"winner",
+										"winners"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Jackpot",
+					"item": [
+						{
+							"name": "Get All Participants",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
